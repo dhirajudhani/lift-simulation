@@ -1,0 +1,86 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    --primary-color: black;
+    --secondary-color: rgb(58, 218, 230);
+    --hover-color: #8cc24f;
+    --bg-color: white;
+
+    --floor-height: 100px;
+
+    font-size: 12px;
+}
+
+body{
+    color: var(--primary-color);
+    background-color: var(--bg-color);
+}
+
+header{
+    padding: 3rem 0;
+    text-align: center;
+}
+
+
+#input-box{
+    height: 70vh;
+    padding-left: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-center{
+    display: flex;
+    margin-top: 75px;
+    flex-direction: column;
+}
+
+
+
+#input-inner-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem 0.5rem;
+}
+#user-input{
+    border-radius: 12px;
+    box-shadow:0px 4px 8px rgba(0, 0, 0, 0.2) ;
+    background: #f2f2f2;
+    height: 300px;
+    width: 300px;
+    padding: 15px;
+}
+#user-input input{
+    
+    font-weight: 600;
+    height: 2rem;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+}
+#btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#user-input button{
+    font-size: 1.1rem;
+    margin-top: 3px;
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+}
+#user-input button:hover{
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: var(--hover-color);
+}

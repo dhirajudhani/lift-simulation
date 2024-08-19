@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lift Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Lift Simulation</h1>
+        <section>
+            <h2 id="floors-count"></h2>
+            <h2 id="lifts-count"></h2>
+        </section>
+    </header>
+    <main>
+        <section id="input-box">
+            <div id="input-inner-box">
+                
+                <form id="user-input">
+                    <div class="flex-center">
+                        <div id="input-container">
+                            <input type="number" name="floors-input" id="floors-input" min="1" max="100" required placeholder="Enter no of Floors:">
+                            <input type="number" name="lifts-input" id="lifts-input" min="1" max="100" required placeholder="Enter no of Lifts:">
+                        </div>
+                        <div id="btn"><button id="submit" type="submit">Generate</button></div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section id="floors-container">
+
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
