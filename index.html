@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>Welcome to Lift Simulation</h1>
-        <section>
+        <section id="input-count">
             <h2 id="floors-count"></h2>
             <h2 id="lifts-count"></h2>
         </section>
@@ -17,22 +17,28 @@
     <main>
         <section id="input-box">
             <div id="input-inner-box">
-                
+                <h2>Enter Input to start:- </h2>
                 <form id="user-input">
-                    <div class="flex-center">
-                        <div id="input-container">
-                            <input type="number" name="floors-input" id="floors-input" min="1" max="100" required placeholder="Enter no of Floors:">
-                            <input type="number" name="lifts-input" id="lifts-input" min="1" max="100" required placeholder="Enter no of Lifts:">
+                        <div class="flex-center">
+                            <div>
+                                <input name="floors-input" id="floors-input" min="1" max="100" required type="number" placeholder="Floors:">
+                                <input name="lifts-input" id="lifts-input" min="1" max="10" required type="number" placeholder="Lifts:">
+                            </div>
+                            
+                            
+                            <button id="submit" type="submit">Present Simulation</button>
                         </div>
-                        <div id="btn"><button id="submit" type="submit">Generate</button></div>
-                    </div>
                 </form>
             </div>
         </section>
+        
         <section id="floors-container">
+            <!-- floors will come here and lifts will be at 0th floor initially -->
 
         </section>
     </main>
+
+    <!-- javascript -->
     <script src="script.js"></script>
 </body>
 </html>
