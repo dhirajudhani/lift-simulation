@@ -5,6 +5,7 @@ const liftsAvailabilitiy = new Map();
 const liftAt = new Map();
 const floorLiftMap = new Map();
 const pendingCalls = [];
+const liftTrips = new Map()
 
 document.querySelector("button#submit").addEventListener("click", (event) => {
     event.preventDefault(); //to stop page from reloading and showing values in the url i.e. preventing default submit behaviour
@@ -81,21 +82,30 @@ function moveLift(floorId, liftId) {
 
     const floor = document.querySelector(`#${floorId}`);
     const lift = document.querySelector(`#${liftId}`);
+    const snapshotLift = document.querySelector(`#snapshot-${liftId}`);
     const arr = floorId.split('-');
     const floorNumber = parseInt(arr[arr.length - 1]);
 
     const prevFloor = liftAt.get(liftId);
     const diff = Math.abs(prevFloor - floorNumber);
-    const transitionDuration = diff * 2;
+    const transitionDuration = diff * (100 / floorsCount); // Adjust speed based on number of floors
 
     lift.style.transform = `translateY(-${floorNumber * floorHeight}px)`;
     lift.style.transition = `all ${transitionDuration}s`;
+    snapshotLift.style.transform = `translateY(-${floorNumber * 10}px)`;
+    snapshotLift.style.transition = `all ${transitionDuration}s`;
+
     setTimeout(() => {
         openAndCloseDoors(floorId, liftId);
     }, transitionDuration * 1000);
 
     liftAt.set(liftId, floorNumber);
+    const trips = liftTrips.get(liftId) + 1;
+    liftTrips.set(liftId,trips);
+    document.querySelector(`#${liftId} .trip-counter`).textContent = `Trips:${trips}`
 }
+
+
 
 
 function openAndCloseDoors(floorId, liftId) {
@@ -122,6 +132,9 @@ function openAndCloseDoors(floorId, liftId) {
 
 function renderFloors(totalFloors) {
     const floorsContainer = document.querySelector("#floors-container");
+    const snapshotContainer = document.querySelector("#snapshot-view");
+    snapshotContainer.innerHTML = ''; // Clear previous snapshot view
+
     for (let floorNumber = totalFloors; floorNumber > 0; floorNumber--) {
         const currentFloor = document.createElement("section");
         currentFloor.className = "floor";
@@ -139,7 +152,14 @@ function renderFloors(totalFloors) {
 
         floorsContainer.appendChild(currentFloor);
         floorLiftMap.set(floorId, null);
+
+        // Add floor to snapshot view
+        const snapshotFloor = document.createElement("div");
+        snapshotFloor.className = "floor";
+        snapshotFloor.id = `snapshot-${floorId}`;
+        snapshotContainer.appendChild(snapshotFloor);
     }
+
     const groundFloor = document.createElement("section");
     groundFloor.className = "floor";
     groundFloor.id = "floor-0";
@@ -153,13 +173,17 @@ function renderFloors(totalFloors) {
     floorsContainer.appendChild(groundFloor);
     floorLiftMap.set("floor-0", null);
 
-    floorsContainer.style.visibility = "visible";
-    floorsContainer.style.border = "2px solid var(--primary-color)";
+    // Add ground floor to snapshot view
+    const snapshotGroundFloor = document.createElement("div");
+    snapshotGroundFloor.className = "floor";
+    snapshotGroundFloor.id = "snapshot-floor-0";
+    snapshotContainer.appendChild(snapshotGroundFloor);
 }
-
 
 function renderLifts(totalLifts) {
     const groundFloor = document.querySelector("#floors-container>#floor-0");
+    const snapshotGroundFloor = document.querySelector("#snapshot-floor-0");
+
     for (let liftNumber = 1; liftNumber <= totalLifts; liftNumber++) {
         const currentLift = document.createElement("section");
         currentLift.className = "lift";
@@ -170,6 +194,13 @@ function renderLifts(totalLifts) {
         `;
         liftsAvailabilitiy.set(`lift-${liftNumber}`, true);
         liftAt.set(`lift-${liftNumber}`, 0);
+        liftTrips.set(`lift-${liftNumber}`,0)
         groundFloor.appendChild(currentLift);
+
+        // Add lift to snapshot view
+        const snapshotLift = document.createElement("div");
+        snapshotLift.className = "lift";
+        snapshotLift.id = `snapshot-lift-${liftNumber}`;
+        snapshotGroundFloor.appendChild(snapshotLift);
     }
 }

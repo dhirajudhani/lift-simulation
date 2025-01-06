@@ -199,3 +199,28 @@ button.down:hover{
         font-size: 8px;
     }
 }
+
+#snapshot-view {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 150px;
+    height: 100px;
+    border: 1px solid #000;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+#snapshot-view .floor {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#snapshot-view .lift {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #000;
+}
